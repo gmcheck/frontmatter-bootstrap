@@ -1,0 +1,10 @@
+{
+  "defaultType": "note",
+  "defaultStatus": "active",
+  "defaultSource": "personal",
+  "enableCreated": true,
+  "enableUpdated": true,
+  "autoUpdateModifiedDate": true,
+  "customTemplate": "",
+  "customDomains": []
+}

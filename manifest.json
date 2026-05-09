@@ -1,0 +1,10 @@
+{
+  "id": "frontmatter-bootstrap",
+  "name": "Frontmatter Bootstrap",
+  "version": "1.0.0",
+  "minAppVersion": "0.15.0",
+  "description": "Auto-insert stable YAML frontmatter metadata template on new notes.",
+  "author": "",
+  "authorUrl": "",
+  "isDesktopOnly": false
+}
