@@ -2,6 +2,25 @@
 
 一个极简、稳定的 Obsidian metadata 基础设施插件。
 
+## 为什么需要它？
+
+### 1. 统一 metadata 结构
+
+### 2. 为 Dataview、Bases、Obsidian Properties 等提供基础
+
+Obsidian 早期更偏向：
+“Tag-first PKM”
+
+但随着：
+Properties
+Dataview
+Bases
+Metadata 系统
+
+逐渐成熟，
+Obsidian 正在转向：
+“Property-first Knowledge System”。
+
 ## 功能
 
 ### 自动插入 Frontmatter 模板
