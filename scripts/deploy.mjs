@@ -17,7 +17,7 @@ if (!existsSync(zipsDir)) {
 const zipFileName = `${pluginId}-${version}.zip`;
 const zipFilePath = join(zipsDir, zipFileName);
 
-const files = ["main.js", "manifest.json"].filter((f) =>
+const files = ["main.js", "manifest.json", "styles.css"].filter((f) =>
 	existsSync(join(root, f))
 );
 

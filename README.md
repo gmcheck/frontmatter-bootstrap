@@ -1,6 +1,6 @@
 # Frontmatter Bootstrap
 
-一个极简、稳定的 Obsidian metadata 基础设施插件。
+一个极简、稳定的 Obsidian metadata convention bootstrap 插件。
 
 ## 为什么需要它？
 
@@ -9,7 +9,7 @@
 ### 2. 为 Dataview、Bases、Obsidian Properties 等提供基础
 
 Obsidian 早期更偏向：
-“Tag-first PKM”
+"Tag-first PKM"
 
 但随着：
 Properties
@@ -19,7 +19,7 @@ Metadata 系统
 
 逐渐成熟，
 Obsidian 正在转向：
-“Property-first Knowledge System”。
+"Property-first Knowledge System"。
 
 ## 功能
 
@@ -58,7 +58,7 @@ tags:
 手动执行检查，发现笔记中的 metadata 问题：
 
 - 缺少必填字段（type、status、created、updated）
-- 枚举值不合法
+- 枚举值不合法（检查 vocabulary）
 - 日期格式错误（非 YYYY-MM-DD）
 - 可能的拼写错误（`statu` → `status`）
 
@@ -101,17 +101,32 @@ tags:
 
 在 **Obsidian 设置 → 第三方插件 → Frontmatter Bootstrap** 中：
 
-**默认值**
-- Default type — 笔记类型默认值（note / project）
-- Default status — 状态默认值（active / done / archived）
-- Default source — 来源默认值（personal / external）
+**Base Options**
+
+设置页面包含 type、status、source 三个 vocabulary 编辑器，每个显示为独立卡片：
+
+```
+┌─────────────────────────────────────────────────────┐
+│ Type  Defines the structural role       [+ Add]    │
+│                                                     │
+│  note          General knowledge note            ✕  │
+│  project       Project-oriented...               ✕  │
+│                                                     │
+│  Default type            [note ▼]                  │
+└─────────────────────────────────────────────────────┘
+```
+
+- **值列表**：显示当前所有 vocabulary 值及其描述
+- **删除按钮**：点击 ✕ 删除该值
+- **+ Add 按钮**：位于卡片右上角，点击添加新值
+- **Default 下拉框**：从 vocabulary 中选择默认值
 
 **功能开关**
 - Enable created field — 插入 `created` 字段
 - Enable updated field — 插入 `updated` 字段
 - Auto-update modified date — 保存时自动更新 `updated`
 
-**自定义 domain**
+**Domain options**
 - Domain vocabulary — 逗号分隔，定义合法 domain 值
 
 **自定义模板**
@@ -130,15 +145,23 @@ priority: high
 
 ## 字段说明
 
-| 字段 | 类型 | 说明 | 允许值 |
-|------|------|------|--------|
-| `type` | Select | 笔记类型 | note / project |
-| `domain` | Text | 领域分类 | Domain vocabulary 中定义 |
-| `status` | Select | 状态 | active / done / archived |
-| `created` | Date | 创建日期 | YYYY-MM-DD |
-| `updated` | Date | 更新日期 | YYYY-MM-DD |
-| `source` | Select | 来源 | personal / external |
-| `tags` | Tags | 标签 | 自由文本 |
+| 字段 | 类型 | 说明 |
+|------|------|------|
+| `type` | Select | 笔记类型（可自定义 vocabulary） |
+| `domain` | Text | 领域分类 |
+| `status` | Select | 状态（可自定义 vocabulary） |
+| `created` | Date | 创建日期（YYYY-MM-DD） |
+| `updated` | Date | 更新日期（YYYY-MM-DD） |
+| `source` | Select | 来源（可自定义 vocabulary） |
+| `tags` | Tags | 标签 |
+
+**默认 vocabulary：**
+
+| 字段 | 默认值 |
+|------|--------|
+| type | note, project |
+| status | active, done, archived |
+| source | personal, external |
 
 预设 domain：music, bigdata, aigc, ecommerce, programming, finance, system
 

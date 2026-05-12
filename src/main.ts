@@ -1,5 +1,5 @@
 import { Plugin, TFile, TFolder, FuzzySuggestModal, Notice } from "obsidian";
-import { PluginSettings, DEFAULT_SETTINGS, ValidationScope } from "./types";
+import { PluginSettings, DEFAULT_SETTINGS, ValidationScope, DEFAULT_TYPE_VOCABULARY, DEFAULT_STATUS_VOCABULARY, DEFAULT_SOURCE_VOCABULARY, DEFAULT_DOMAINS } from "./types";
 import { generateTemplate } from "./template";
 import { insertFrontMatter, updateModifiedDate, hasFrontMatter, isFileEmpty } from "./metadata";
 import { validateCurrentNote, validateFolder, validateVault } from "./validation/engine";
@@ -99,9 +99,28 @@ export default class FrontmatterBootstrapPlugin extends Plugin {
 		const data = await this.loadData();
 		this.settings = Object.assign({}, DEFAULT_SETTINGS, data);
 
+		let migrated = false;
+
 		if ((this.settings as any).customDomains && this.settings.domainVocabulary.length === 0) {
 			this.settings.domainVocabulary = [...(this.settings as any).customDomains];
 			delete (this.settings as any).customDomains;
+			migrated = true;
+		}
+
+		if (!this.settings.typeVocabulary || this.settings.typeVocabulary.length === 0) {
+			this.settings.typeVocabulary = [...DEFAULT_TYPE_VOCABULARY];
+			migrated = true;
+		}
+		if (!this.settings.statusVocabulary || this.settings.statusVocabulary.length === 0) {
+			this.settings.statusVocabulary = [...DEFAULT_STATUS_VOCABULARY];
+			migrated = true;
+		}
+		if (!this.settings.sourceVocabulary || this.settings.sourceVocabulary.length === 0) {
+			this.settings.sourceVocabulary = [...DEFAULT_SOURCE_VOCABULARY];
+			migrated = true;
+		}
+
+		if (migrated) {
 			await this.saveSettings();
 		}
 	}

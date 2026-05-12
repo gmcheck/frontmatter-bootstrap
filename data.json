@@ -1,10 +1,69 @@
 {
-  "defaultType": "note",
+  "defaultType": "demo",
   "defaultStatus": "active",
   "defaultSource": "personal",
+  "typeVocabulary": [
+    {
+      "value": "note",
+      "description": "General knowledge note"
+    },
+    {
+      "value": "project",
+      "description": "Project-oriented content with a lifecycle"
+    },
+    {
+      "value": "demo",
+      "description": "this is a demo"
+    },
+    {
+      "value": "a",
+      "description": "a"
+    },
+    {
+      "value": "aa",
+      "description": "aa"
+    },
+    {
+      "value": "aaa",
+      "description": "aaa"
+    }
+  ],
+  "statusVocabulary": [
+    {
+      "value": "active",
+      "description": "Currently active and maintained"
+    },
+    {
+      "value": "done",
+      "description": "Completed, but still in active knowledge space"
+    },
+    {
+      "value": "archived",
+      "description": "Archived from active knowledge space"
+    }
+  ],
+  "sourceVocabulary": [
+    {
+      "value": "personal",
+      "description": "Personal thinking/organization"
+    },
+    {
+      "value": "external",
+      "description": "External material organization"
+    }
+  ],
   "enableCreated": true,
   "enableUpdated": true,
   "autoUpdateModifiedDate": true,
   "customTemplate": "",
+  "domainVocabulary": [
+    "music",
+    "bigdata",
+    "aigc",
+    "ecommerce",
+    "programming",
+    "finance",
+    "system"
+  ],
   "customDomains": []
 }

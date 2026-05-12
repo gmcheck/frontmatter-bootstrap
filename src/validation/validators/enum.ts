@@ -1,4 +1,4 @@
-import { ValidationIssue, ENUM_FIELDS, PluginSettings } from "../../types";
+import { ValidationIssue, PluginSettings } from "../../types";
 
 export function validateEnum(
 	frontmatter: Record<string, unknown> | null,
@@ -8,12 +8,19 @@ export function validateEnum(
 
 	if (!frontmatter) return issues;
 
-	for (const [field, allowedValues] of Object.entries(ENUM_FIELDS)) {
+	const vocabMap: Record<string, { vocab: { value: string }[]; label: string }> = {
+		type: { vocab: settings.typeVocabulary, label: "type" },
+		status: { vocab: settings.statusVocabulary, label: "status" },
+		source: { vocab: settings.sourceVocabulary, label: "source" },
+	};
+
+	for (const [field, { vocab }] of Object.entries(vocabMap)) {
 		const value = frontmatter[field];
 		if (value === undefined || value === null) continue;
 
 		const strValue = String(value);
-		if (!allowedValues.includes(strValue as never)) {
+		const allowedValues = vocab.map((e) => e.value);
+		if (!allowedValues.includes(strValue)) {
 			issues.push({
 				field,
 				severity: "warning",
@@ -29,7 +36,7 @@ export function validateEnum(
 		if (!domainVocab.includes(strDomain)) {
 			issues.push({
 				field: "domain",
-				severity: "info",
+				severity: "warning",
 				message: `Domain "${strDomain}" is not in domain vocabulary: ${domainVocab.join(", ")}`,
 			});
 		}

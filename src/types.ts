@@ -1,10 +1,24 @@
-export type NoteType = "note" | "project";
-export type NoteStatus = "active" | "done" | "archived";
-export type NoteSource = "personal" | "external";
+export interface VocabEntry {
+	value: string;
+	description: string;
+}
 
-export const VALID_TYPES: NoteType[] = ["note", "project"];
-export const VALID_STATUSES: NoteStatus[] = ["active", "done", "archived"];
-export const VALID_SOURCES: NoteSource[] = ["personal", "external"];
+export const DEFAULT_TYPE_VOCABULARY: VocabEntry[] = [
+	{ value: "note", description: "General knowledge note" },
+	{ value: "project", description: "Project-oriented content with a lifecycle" },
+];
+
+export const DEFAULT_STATUS_VOCABULARY: VocabEntry[] = [
+	{ value: "active", description: "Currently active and maintained" },
+	{ value: "done", description: "Completed, but still in active knowledge space" },
+	{ value: "archived", description: "Archived from active knowledge space" },
+];
+
+export const DEFAULT_SOURCE_VOCABULARY: VocabEntry[] = [
+	{ value: "personal", description: "Personal thinking/organization" },
+	{ value: "external", description: "External material organization" },
+];
+
 export const DEFAULT_DOMAINS: string[] = [
 	"music",
 	"bigdata",
@@ -19,12 +33,6 @@ export const REQUIRED_FIELDS: string[] = ["type", "status", "created", "updated"
 
 export const DATE_FIELDS: string[] = ["created", "updated"];
 
-export const ENUM_FIELDS: Record<string, string[]> = {
-	type: VALID_TYPES,
-	status: VALID_STATUSES,
-	source: VALID_SOURCES,
-};
-
 export const KNOWN_FIELDS: string[] = [
 	"type",
 	"domain",
@@ -36,9 +44,12 @@ export const KNOWN_FIELDS: string[] = [
 ];
 
 export interface PluginSettings {
-	defaultType: NoteType;
-	defaultStatus: NoteStatus;
-	defaultSource: NoteSource;
+	defaultType: string;
+	defaultStatus: string;
+	defaultSource: string;
+	typeVocabulary: VocabEntry[];
+	statusVocabulary: VocabEntry[];
+	sourceVocabulary: VocabEntry[];
 	enableCreated: boolean;
 	enableUpdated: boolean;
 	autoUpdateModifiedDate: boolean;
@@ -50,6 +61,9 @@ export const DEFAULT_SETTINGS: PluginSettings = {
 	defaultType: "note",
 	defaultStatus: "active",
 	defaultSource: "personal",
+	typeVocabulary: [...DEFAULT_TYPE_VOCABULARY],
+	statusVocabulary: [...DEFAULT_STATUS_VOCABULARY],
+	sourceVocabulary: [...DEFAULT_SOURCE_VOCABULARY],
 	enableCreated: true,
 	enableUpdated: true,
 	autoUpdateModifiedDate: true,
